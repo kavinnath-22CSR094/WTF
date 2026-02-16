@@ -1,0 +1,5 @@
+Running API Tests...
+Test 1 (COD Order): Status 201
+PASS: COD Order created successfully
+Test 2 (GPay Missing Params): Status 400
+PASS: GPay Order correctly rejected (missing fields)
