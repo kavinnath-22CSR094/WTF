@@ -20,7 +20,7 @@ const DELIVERY_LOCATIONS = [
 
 
 
-const OrderForm = ({ selectedItems }) => {
+const OrderForm = ({ selectedItems, clearCart }) => {
     const [formData, setFormData] = useState({
         name: '',
         contact: '',
@@ -88,6 +88,7 @@ const OrderForm = ({ selectedItems }) => {
             if (response.status === 201) {
                 setStatus('Order placed successfully! ✅');
                 setFormData({ name: '', contact: '', location: '', rollNo: '' });
+                clearCart();
             } else {
                 setStatus(`Error: ${data.message} ❌`);
             }

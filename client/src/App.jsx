@@ -29,12 +29,16 @@ function App() {
         });
     };
 
+    const clearCart = () => {
+        setSelectedItems([]);
+    };
+
     return (
         <>
             <img src="/images/WTF.jpg" alt="WTF" style={{ width: '100%', height: '250px' }} />
             <div className="container">
                 <Menu selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} />
-                <OrderForm selectedItems={selectedItems} />
+                <OrderForm selectedItems={selectedItems} clearCart={clearCart} />
             </div>
         </>
     );
