@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Menu from './components/Menu';
 import OrderForm from './components/OrderForm';
+import Footer from './components/Footer';
 
 function App() {
     const [selectedItems, setSelectedItems] = useState([]);
@@ -40,6 +41,7 @@ function App() {
                 <Menu selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} />
                 <OrderForm selectedItems={selectedItems} clearCart={clearCart} />
             </div>
+            <Footer />
         </>
     );
 }

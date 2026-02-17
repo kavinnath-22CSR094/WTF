@@ -95,7 +95,7 @@ const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
                                     ) : (
                                         <button
                                             onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                                            style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px', color: 'white', cursor: 'pointer' }}
+                                            style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(15, 50, 246, 0.46)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px', color: 'white', cursor: 'pointer' }}
                                         >
                                             Add to Cart
                                         </button>
