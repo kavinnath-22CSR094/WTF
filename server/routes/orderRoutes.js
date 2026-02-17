@@ -45,5 +45,30 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Server Error', details: error.message });
     }
 });
+router.get('/getorders', async (req, res) => {
+    try {
+        const orders = await Order.find().sort({ createdAt: -1 });
+        console.log(orders);
+        res.json(orders);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
+// 🔹 Update order status & payment
+router.put('/getorders/:id', async (req, res) => {
+    try {
+        const { status, payment } = req.body;
+
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            { status, payment },
+            { new: true }
+        );
+
+        res.json(order);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
 module.exports = router;
