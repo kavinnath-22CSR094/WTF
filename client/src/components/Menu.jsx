@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const MENU_CATEGORIES = [
     {
@@ -88,7 +89,7 @@ const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
                 ))}
             </div>
 
-            {selectedCategory && (
+            {selectedCategory && ReactDOM.createPortal(
                 <div className="modal-overlay" onClick={closeCategory}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
@@ -148,7 +149,8 @@ const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </div>
     );
