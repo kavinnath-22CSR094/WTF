@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Menu from './components/Menu';
 import OrderForm from './components/OrderForm';
+import CartSummary from './components/CartSummary';
 import Footer from './components/Footer';
 
 function App() {
     const [selectedItems, setSelectedItems] = useState([]);
+    const [view, setView] = useState('menu'); // 'menu' or 'checkout'
 
     const addToCart = (item) => {
         setSelectedItems((prev) => {
@@ -32,14 +34,33 @@ function App() {
 
     const clearCart = () => {
         setSelectedItems([]);
+        setView('menu'); // Go back to menu after order
     };
+
+    const totalItems = selectedItems.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
         <>
             <img src="/images/WTF.jpg" alt="WTF" style={{ width: '100%', height: '250px' }} />
             <div className="container">
-                <Menu selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} />
-                <OrderForm selectedItems={selectedItems} clearCart={clearCart} />
+                {view === 'menu' ? (
+                    <>
+                        <Menu selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} />
+                        {selectedItems.length > 0 && (
+                            <button className="floating-checkout-btn" onClick={() => setView('checkout')}>
+                                Checkout ({totalItems})
+                            </button>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <button className="back-btn" onClick={() => setView('menu')}>
+                            &larr; Back to Menu
+                        </button>
+                        <CartSummary selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} />
+                        <OrderForm selectedItems={selectedItems} clearCart={clearCart} />
+                    </>
+                )}
             </div>
             <Footer />
         </>

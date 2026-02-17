@@ -28,6 +28,7 @@ const OrderForm = ({ selectedItems, clearCart }) => {
         rollNo: '',
     });
     const [status, setStatus] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,6 +44,9 @@ const OrderForm = ({ selectedItems, clearCart }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (isSubmitting) return; // Prevent duplicate submissions
+
         const { name, contact, location, rollNo } = formData;
 
         if (!name || !contact || !location || !rollNo) {
@@ -59,6 +63,9 @@ const OrderForm = ({ selectedItems, clearCart }) => {
             alert('Contact number must be exactly 10 digits');
             return;
         }
+
+        setIsSubmitting(true);
+        setStatus('Placing Order... ⏳');
 
         const totalAmount = selectedItems.reduce((total, item) => total + (parseInt(item.price.replace('₹', '')) * item.quantity), 0);
 
@@ -88,18 +95,25 @@ const OrderForm = ({ selectedItems, clearCart }) => {
             if (response.status === 201) {
                 setStatus('Order placed successfully! ✅');
                 setFormData({ name: '', contact: '', location: '', rollNo: '' });
-                clearCart();
+                setTimeout(() => {
+                    alert('Order is noted! We will deliver it soon.');
+                    clearCart();
+                    setStatus('');
+                    setIsSubmitting(false);
+                }, 500);
             } else {
                 setStatus(`Error: ${data.message} ❌`);
+                setIsSubmitting(false);
             }
         } catch (error) {
             console.error('Error:', error);
             setStatus('Server error. Please try again. ❌');
+            setIsSubmitting(false);
         }
     };
 
     return (
-        <div className="glass-panel" style={{ marginTop: '2rem' }}>
+        <div className="glass-panel1" style={{ marginTop: '2rem' }}>
             <h2>Place Your Order</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -163,7 +177,7 @@ const OrderForm = ({ selectedItems, clearCart }) => {
                     marginTop: '1rem',
                     padding: '1rem',
                     borderRadius: '0.5rem',
-                    background: status.includes('Success') ? 'rgba(0, 255, 136, 0.2)' : 'rgba(255, 0, 85, 0.2)',
+                    background: status.includes('Success') || status.includes('noted') ? 'rgba(0, 255, 136, 0.2)' : status.includes('Placing') ? 'rgba(0, 229, 255, 0.2)' : 'rgba(255, 0, 85, 0.2)',
                     color: 'white',
                     textAlign: 'center'
                 }}>{status}</p>}
@@ -172,7 +186,17 @@ const OrderForm = ({ selectedItems, clearCart }) => {
                     Total Amount: ₹{selectedItems.reduce((total, item) => total + (parseInt(item.price.replace('₹', '')) * item.quantity), 0)}
                 </div>
 
-                <button type="submit" style={{ marginTop: '1rem' }}>Place Order</button>
+                <button
+                    type="submit"
+                    style={{
+                        marginTop: '1rem',
+                        opacity: isSubmitting ? 0.7 : 1,
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer'
+                    }}
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Placing Order...' : 'Place Order'}
+                </button>
             </form>
         </div>
     );
