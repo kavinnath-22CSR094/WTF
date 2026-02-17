@@ -242,14 +242,14 @@ label {
   /* Remove padding from container */
   width: 100%;
   max-width: 1000px;
-  height: 90vh;
-  /* Fixed height */
+  max-height: 90vh;
+  /* Use max-height instead of fixed height */
   display: flex;
   /* Use flexbox */
   flex-direction: column;
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  overflow: auto;
+  overflow: hidden;
   /* Clip children */
 }
 
@@ -274,6 +274,8 @@ label {
   padding: 2rem;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  /* Important for flex scrolling */
 }
 
 .close-modal {
