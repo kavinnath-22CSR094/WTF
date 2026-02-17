@@ -46,7 +46,7 @@ const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
 
     React.useEffect(() => {
         if (selectedCategory) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'auto';
         } else {
             document.body.style.overflow = 'auto';
         }
@@ -91,57 +91,61 @@ const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
             {selectedCategory && (
                 <div className="modal-overlay" onClick={closeCategory}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-modal" onClick={closeCategory}>&times;</button>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>{selectedCategory.title}</h2>
-                        <div className="menu-grid">
-                            {selectedCategory.items.map((item) => {
-                                const selectedItem = selectedItems.find((i) => i.id === item.id);
-                                const quantity = selectedItem ? selectedItem.quantity : 0;
+                        <div className="modal-header">
+                            <button className="close-modal" onClick={closeCategory}>&times;</button>
+                            <h2>{selectedCategory.title}</h2>
+                        </div>
+                        <div className="modal-body">
+                            <div className="menu-grid">
+                                {selectedCategory.items.map((item) => {
+                                    const selectedItem = selectedItems.find((i) => i.id === item.id);
+                                    const quantity = selectedItem ? selectedItem.quantity : 0;
 
-                                return (
-                                    <div
-                                        key={item.id}
-                                        className={`menu-item ${quantity > 0 ? 'selected' : ''}`}
-                                    >
-                                        {item.image ? (
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="menu-image"
-                                            />
-                                        ) : (
-                                            <div style={{ fontSize: '3rem' }}>{item.icon}</div>
-                                        )}
-                                        <h3>{item.name}</h3>
-                                        <p className="price">{item.price}</p>
+                                    return (
+                                        <div
+                                            key={item.id}
+                                            className={`menu-item ${quantity > 0 ? 'selected' : ''}`}
+                                        >
+                                            {item.image ? (
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className="menu-image"
+                                                />
+                                            ) : (
+                                                <div style={{ fontSize: '3rem' }}>{item.icon}</div>
+                                            )}
+                                            <h3>{item.name}</h3>
+                                            <p className="price">{item.price}</p>
 
-                                        {quantity > 0 ? (
-                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
-                                                <button
-                                                    onClick={(e) => { e.stopPropagation(); removeFromCart(item); }}
-                                                    style={{ padding: '0.2rem 0.8rem', background: '#ff4d4d', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
-                                                >
-                                                    -
-                                                </button>
-                                                <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{quantity}</span>
+                                            {quantity > 0 ? (
+                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
+                                                    <button
+                                                        onClick={(e) => { e.stopPropagation(); removeFromCart(item); }}
+                                                        style={{ padding: '0.2rem 0.8rem', background: '#ff4d4d', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{quantity}</span>
+                                                    <button
+                                                        onClick={(e) => { e.stopPropagation(); addToCart(item); }}
+                                                        style={{ padding: '0.2rem 0.8rem', background: '#00cc66', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            ) : (
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                                                    style={{ padding: '0.2rem 0.8rem', background: '#00cc66', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
+                                                    style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(15, 50, 246, 0.46)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px', color: 'white', cursor: 'pointer' }}
                                                 >
-                                                    +
+                                                    Add to Cart
                                                 </button>
-                                            </div>
-                                        ) : (
-                                            <button
-                                                onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                                                style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(15, 50, 246, 0.46)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px', color: 'white', cursor: 'pointer' }}
-                                            >
-                                                Add to Cart
-                                            </button>
-                                        )}
-                                    </div>
-                                );
-                            })}
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>
