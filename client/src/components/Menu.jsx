@@ -19,7 +19,7 @@ const MENU_CATEGORIES = [
             { id: 'mojito_strawberry', name: 'Strawberry Mojito', price: '₹60', image: '/images/mojito_strawberry.png' },
             { id: 'mojito_watermelon', name: 'Watermelon Mojito', price: '₹60', image: '/images/mojito_watermelon.png' },
             { id: 'mojito_lemon_mint', name: 'Lemon & Mint Mojito', price: '₹60', image: '/images/mojito_lemon_mint.png' },
-            { id: 'mojito_bubblegum', name: 'Bubblegum Mojito', price: '₹60', image: '/images/mojito_bubblegum.png' },
+            { id: 'mojito_vanilla', name: 'Vanilla Mojito', price: '₹60', image: '/images/mojito_vanilla.png' },
         ]
     },
     {
@@ -38,10 +38,12 @@ const MENU_CATEGORIES = [
             { id: 'fruit_pineapple', name: 'Pineapple', price: '₹20', image: '/images/Pineapple.webp' },
             { id: 'fruit_watermelon', name: 'Watermelon', price: '₹20', image: '/images/watermelon.jpg' },
             { id: 'fruit_cucumber', name: 'Cucumber', price: '₹20', image: '/images/cucumber.jpg' },
+            { id: 'fruit_guava', name: 'Guava', price: '₹20', image: '/images/guava.png' },
         ]
     },
     {
         title: 'COMBOS',
+        image: '/images/combo4.png',
         items: [
             { id: 'combo_chilli_3', name: 'Chilli Chicken Biriyani\n( 3 Combo )', price: '₹340', image: '/images/biriyani_chilli.jpg' },
             { id: 'combo_chicken_3', name: 'Chicken Biriyani\n( 3 Combo )', price: '₹320', image: '/images/biriyani_chicken.jpg' },
@@ -94,9 +96,9 @@ const Menu = ({ selectedItems, addToCart, removeFromCart, onCheckout }) => {
                     >
                         {/* Use the first item's image as the category thumbnail */}
                         <img
-                            src={category.items[0].image}
+                            src={category.image || category.items[0].image}
                             alt={category.title}
-                            className="category-image"
+                            className={`category-image ${category.title === 'COMBOS' ? 'combo-img' : ''}`}
                         />
                         <div className="category-title">
                             <h3>{category.title}</h3>
