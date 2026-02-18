@@ -39,6 +39,22 @@ const MENU_CATEGORIES = [
             { id: 'fruit_watermelon', name: 'Watermelon', price: '₹20', image: '/images/watermelon.jpg' },
             { id: 'fruit_cucumber', name: 'Cucumber', price: '₹20', image: '/images/cucumber.jpg' },
         ]
+    },
+    {
+        title: 'COMBOS',
+        items: [
+            { id: 'combo_chilli_3', name: 'Chilli Chicken Biriyani\n( 3 Combo )', price: '₹340', image: '/images/biriyani_chilli.jpg' },
+            { id: 'combo_chicken_3', name: 'Chicken Biriyani\n( 3 Combo )', price: '₹320', image: '/images/biriyani_chicken.jpg' },
+            { id: 'combo_biriyani_halwa', name: 'Biriyani + Bread Halwa', price: '₹400', image: '/images/biriyani_bread_halwa.png' },
+            { id: 'combo_chilli_biriyani_mojito', name: 'Chilli Biriyani + Mojito', price: '₹170', image: '/images/biriyani_chilli.jpg' },
+            { id: 'combo_chicken_biriyani_mojito', name: 'Chicken Biriyani + Mojito', price: '₹160', image: '/images/biriyani_chicken.jpg' },
+            { id: 'combo_biriyani_halwa_mojito', name: 'Biriyani + Bread Halwa + Mojito', price: '₹190', image: '/images/biriyani_bread_halwa.png' },
+            { id: 'combo_mojito_2', name: 'Mojiti ( 2 combo )', price: '₹100', image: '/images/mojito_blue1.png' },
+            { id: 'combo_chicken_momos_mojito', name: 'Chicken Momos + Mojito', price: '₹125', image: '/images/chicken momos.png' },
+            { id: 'combo_veg_momos_mojito', name: 'Veg Momos + Mojito', price: '₹115', image: '/images/momos_veg.png' },
+            { id: 'combo_mushroom_momos_mojito', name: 'Mushroom Momos + Mojito', price: '₹125', image: '/images/mushroom momos.png' },
+            { id: 'combo_peri_peri_chicken_momos_mojito', name: 'Peri Peri Chicken Momos + Mojito', price: '₹135', image: '/images/momos_peri_peri_chicken.png' },
+        ]
     }
 ];
 
@@ -97,56 +113,102 @@ const Menu = ({ selectedItems, addToCart, removeFromCart, onCheckout }) => {
                             <h2>{selectedCategory.title}</h2>
                         </div>
                         <div className="modal-body">
-                            <div className="menu-grid">
-                                {selectedCategory.items.map((item) => {
-                                    const selectedItem = selectedItems.find((i) => i.id === item.id);
-                                    const quantity = selectedItem ? selectedItem.quantity : 0;
+                            {selectedCategory.title === 'COMBOS' ? (
+                                <div className="combo-list">
+                                    {selectedCategory.items.map((item) => {
+                                        const selectedItem = selectedItems.find((i) => i.id === item.id);
+                                        const quantity = selectedItem ? selectedItem.quantity : 0;
 
-                                    return (
-                                        <div
-                                            key={item.id}
-                                            className={`menu-item ${quantity > 0 ? 'selected' : ''}`}
-                                        >
-                                            {item.image ? (
-                                                <img
-                                                    src={item.image}
-                                                    alt={item.name}
-                                                    className="menu-image"
-                                                />
-                                            ) : (
-                                                <div style={{ fontSize: '3rem' }}>{item.icon}</div>
-                                            )}
-                                            <h3>{item.name}</h3>
-                                            <p className="price">{item.price}</p>
+                                        return (
+                                            <div key={item.id} className={`combo-item ${quantity > 0 ? 'selected' : ''}`}>
+                                                <div className="combo-info">
+                                                    <h3>{item.name}</h3>
+                                                </div>
+                                                <div className="combo-price">
+                                                    {item.price}
+                                                </div>
+                                                <div className="combo-actions">
+                                                    {quantity > 0 ? (
+                                                        <div className="qty-controls">
+                                                            <button
+                                                                onClick={(e) => { e.stopPropagation(); removeFromCart(item); }}
+                                                                className="qty-btn minus"
+                                                            >
+                                                                -
+                                                            </button>
+                                                            <span>{quantity}</span>
+                                                            <button
+                                                                onClick={(e) => { e.stopPropagation(); addToCart(item); }}
+                                                                className="qty-btn plus"
+                                                            >
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            onClick={(e) => { e.stopPropagation(); addToCart(item); }}
+                                                            className="add-btn"
+                                                        >
+                                                            Add
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <div className="menu-grid">
+                                    {selectedCategory.items.map((item) => {
+                                        const selectedItem = selectedItems.find((i) => i.id === item.id);
+                                        const quantity = selectedItem ? selectedItem.quantity : 0;
 
-                                            {quantity > 0 ? (
-                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
-                                                    <button
-                                                        onClick={(e) => { e.stopPropagation(); removeFromCart(item); }}
-                                                        style={{ padding: '0.2rem 0.8rem', background: '#ff4d4d', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
-                                                    >
-                                                        -
-                                                    </button>
-                                                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{quantity}</span>
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                className={`menu-item ${quantity > 0 ? 'selected' : ''}`}
+                                            >
+                                                {item.image ? (
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.name}
+                                                        className="menu-image"
+                                                    />
+                                                ) : (
+                                                    <div style={{ fontSize: '3rem' }}>{item.icon}</div>
+                                                )}
+                                                <h3>{item.name}</h3>
+                                                <p className="price">{item.price}</p>
+
+                                                {quantity > 0 ? (
+                                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
+                                                        <button
+                                                            onClick={(e) => { e.stopPropagation(); removeFromCart(item); }}
+                                                            style={{ padding: '0.2rem 0.8rem', background: '#ff4d4d', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{quantity}</span>
+                                                        <button
+                                                            onClick={(e) => { e.stopPropagation(); addToCart(item); }}
+                                                            style={{ padding: '0.2rem 0.8rem', background: '#00cc66', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                ) : (
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                                                        style={{ padding: '0.2rem 0.8rem', background: '#00cc66', border: 'none', borderRadius: '5px', color: 'white', cursor: 'pointer', fontSize: '1.2rem' }}
+                                                        style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(15, 50, 246, 0.46)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px', color: 'white', cursor: 'pointer' }}
                                                     >
-                                                        +
+                                                        Add to Cart
                                                     </button>
-                                                </div>
-                                            ) : (
-                                                <button
-                                                    onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                                                    style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(15, 50, 246, 0.46)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px', color: 'white', cursor: 'pointer' }}
-                                                >
-                                                    Add to Cart
-                                                </button>
-                                            )}
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>,

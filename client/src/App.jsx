@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Menu from './components/Menu';
 import OrderForm from './components/OrderForm';
 import CartSummary from './components/CartSummary';
@@ -7,6 +7,10 @@ import Footer from './components/Footer';
 function App() {
     const [selectedItems, setSelectedItems] = useState([]);
     const [view, setView] = useState('menu'); // 'menu' or 'checkout'
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [view]);
 
     const addToCart = (item) => {
         setSelectedItems((prev) => {
@@ -41,7 +45,7 @@ function App() {
 
     return (
         <>
-            <img src="/images/WTF.jpg" alt="WTF" style={{ width: '100%', height: '250px' }} />
+            <img src="/images/WTF.jpg" alt="WTF" style={{ width: '100%', height: '150px' }} />
             <div className="container">
                 {view === 'menu' ? (
                     <>
