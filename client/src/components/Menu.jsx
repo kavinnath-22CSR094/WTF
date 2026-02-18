@@ -42,7 +42,7 @@ const MENU_CATEGORIES = [
     }
 ];
 
-const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
+const Menu = ({ selectedItems, addToCart, removeFromCart, onCheckout }) => {
     const [selectedCategory, setSelectedCategory] = React.useState(null);
 
     React.useEffect(() => {
@@ -150,6 +150,27 @@ const Menu = ({ selectedItems, addToCart, removeFromCart }) => {
                         </div>
                     </div>
                 </div>,
+                document.body
+            )}
+
+            {/* Render Checkout Button specifically for the modal view if needed, 
+                but actually the main issue is likely z-index. 
+                However, to be safe and user-friendly, let's add a button INSIDE the modal too 
+                OR just ensure the main one is visible. 
+                
+                The plan was to add it inside. Let's stick to that for better UX context. 
+            */}
+            {selectedCategory && selectedItems.length > 0 && ReactDOM.createPortal(
+                <button
+                    className="floating-checkout-btn"
+                    onClick={() => {
+                        closeCategory();
+                        onCheckout();
+                    }}
+                    style={{ zIndex: 1100 }} // Ensure it's above the modal
+                >
+                    Checkout ({selectedItems.reduce((acc, item) => acc + item.quantity, 0)})
+                </button>,
                 document.body
             )}
         </div>

@@ -45,7 +45,7 @@ function App() {
             <div className="container">
                 {view === 'menu' ? (
                     <>
-                        <Menu selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} />
+                        <Menu selectedItems={selectedItems} addToCart={addToCart} removeFromCart={removeFromCart} onCheckout={() => setView('checkout')} />
                         {selectedItems.length > 0 && (
                             <button className="floating-checkout-btn" onClick={() => setView('checkout')}>
                                 Checkout ({totalItems})
