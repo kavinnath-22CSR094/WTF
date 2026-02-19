@@ -31,16 +31,7 @@ const MENU_CATEGORIES = [
             { id: 'momos_peri_peri_chicken', name: 'Peri Peri Chicken Momos\n(5 pieces)', price: '₹85', image: '/images/momos_peri_peri_chicken.png' },
         ]
     },
-    {
-        title: 'FRUITS',
-        items: [
-            { id: 'fruit_mango', name: 'Mango', price: '₹20', image: '/images/mongo.webp' },
-            { id: 'fruit_pineapple', name: 'Pineapple', price: '₹20', image: '/images/Pineapple.webp' },
-            { id: 'fruit_watermelon', name: 'Watermelon', price: '₹20', image: '/images/watermelon.jpg' },
-            { id: 'fruit_cucumber', name: 'Cucumber', price: '₹20', image: '/images/cucumber.jpg' },
-            { id: 'fruit_guava', name: 'Guava', price: '₹20', image: '/images/guava.png' },
-        ]
-    },
+
     {
         title: 'COMBOS',
         image: '/images/combo4.png',
