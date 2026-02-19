@@ -7,7 +7,7 @@ const MENU_CATEGORIES = [
         items: [
             { id: 'biriyani_plain', name: 'Plain Biriyani', price: '₹80', image: '/images/biriyani_plain.jpg' },
             { id: 'biriyani_chicken', name: 'Chicken Biriyani', price: '₹110', image: '/images/biriyani_chicken.jpg' },
-            { id: 'biriyani_bread_halwa', name: 'Chicken Biriyani + Bread Halwa', price: '₹140', image: '/images/biriyani_bread_halwa.png' },
+            { id: 'biriyani_bread_halwa', name: 'Chicken Biriyani + Bread Halwa', price: '₹130', image: '/images/biriyani_bread_halwa.png' },
             { id: 'biriyani_chilli', name: 'Chilli Biriyani', price: '₹120', image: '/images/biriyani_chilli.jpg' },
         ]
     },
@@ -47,15 +47,15 @@ const MENU_CATEGORIES = [
         items: [
             { id: 'combo_chilli_3', name: 'Chilli Chicken Biriyani\n( 3 Combo )', price: '₹340', image: '/images/biriyani_chilli.jpg' },
             { id: 'combo_chicken_3', name: 'Chicken Biriyani\n( 3 Combo )', price: '₹320', image: '/images/biriyani_chicken.jpg' },
-            { id: 'combo_biriyani_halwa', name: 'Biriyani + Bread Halwa', price: '₹400', image: '/images/biriyani_bread_halwa.png' },
+            { id: 'combo_biriyani_halwa_3', name: 'Biriyani + Bread Halwa ( 3 combo )', price: '₹400', image: '/images/biriyani_bread_halwa.png' },
             { id: 'combo_chilli_biriyani_mojito', name: 'Chilli Biriyani + Mojito', price: '₹170', image: '/images/biriyani_chilli.jpg' },
             { id: 'combo_chicken_biriyani_mojito', name: 'Chicken Biriyani + Mojito', price: '₹160', image: '/images/biriyani_chicken.jpg' },
             { id: 'combo_biriyani_halwa_mojito', name: 'Biriyani + Bread Halwa + Mojito', price: '₹190', image: '/images/biriyani_bread_halwa.png' },
             { id: 'combo_mojito_2', name: 'Mojiti ( 2 combo )', price: '₹100', image: '/images/mojito_blue1.png' },
-            { id: 'combo_chicken_momos_mojito', name: 'Chicken Momos + Mojito', price: '₹125', image: '/images/chicken momos.png' },
-            { id: 'combo_veg_momos_mojito', name: 'Veg Momos + Mojito', price: '₹115', image: '/images/momos_veg.png' },
-            { id: 'combo_mushroom_momos_mojito', name: 'Mushroom Momos + Mojito', price: '₹125', image: '/images/mushroom momos.png' },
-            { id: 'combo_peri_peri_chicken_momos_mojito', name: 'Peri Peri Chicken Momos + Mojito', price: '₹135', image: '/images/momos_peri_peri_chicken.png' },
+            { id: 'combo_chicken_momos_mojito', name: 'Chicken Momos + Mojito', price: '₹120', image: '/images/chicken momos.png' },
+            { id: 'combo_veg_momos_mojito', name: 'Veg Momos + Mojito', price: '₹110', image: '/images/momos_veg.png' },
+            { id: 'combo_mushroom_momos_mojito', name: 'Mushroom Momos + Mojito', price: '₹120', image: '/images/mushroom momos.png' },
+            { id: 'combo_peri_peri_chicken_momos_mojito', name: 'Peri Peri Chicken Momos + Mojito', price: '₹130', image: '/images/momos_peri_peri_chicken.png' },
         ]
     }
 ];
